@@ -2,6 +2,15 @@
 <html> 
     <head> 
         <title>Div lists</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
         <style>
     .flex-container {
       display: flex;  flex-direction:row;
@@ -39,6 +48,7 @@
 		<button onclick="makeNewDiv()">Add end</button>
     <button onclick="addFront()">Add front</button>
     <button onclick="remove()">Remove</button>
+    <button onclick="swap()">Swap</button>
 	
 </body>
 <script>
@@ -73,6 +83,27 @@
             Element.className = "divlist";
             var container = document.querySelector(".flex-container");
             container.insertBefore(Element, container.firstChild);
+        }
+
+        function swap(){
+		let divlist = Array.from(document.getElementsByClassName("divlist"));
+		let index1 = Math.floor(Math.random() * divlist.length);
+		let index2 = Math.floor(Math.random() * divlist.length);
+		if(index1 == index2){
+			index2 = Math.floor(Math.random() * divlist.length);
+		}
+		let ele1 = divlist[index1];
+		let ele2 = divlist[index2];
+		if (index1 > index2){
+			var slicelist = divlist.slice(index2, index1);
+		}
+		else{
+			slicelist = divlist.slice(index1, index2);
+		}
+		ele1.parentNode.insertBefore(ele1, ele2);
+		divlist[divlist.length - 1].appendChild(slicelist);
+		let container = document.getElementById('target');
+		container.innerHTML = divlist;
         }
 </script>
 </html>	
